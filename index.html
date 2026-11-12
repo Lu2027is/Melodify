@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melodify - Partilhe as Suas Músicas Favoritas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+
+    /* Cabeçalho */
+    header {
+      background-color: #1e1b4b;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #6366f1;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #818cf8;
+      letter-spacing: 1px;
+    }
+
+    /* Conteúdo Principal */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #818cf8;
+      margin-bottom: 20px;
+      border-left: 4px solid #6366f1;
+      padding-left: 12px;
+    }
+
+    /* Formulário para adicionar música */
+    .form-box {
+      background-color: #1e293b;
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      margin-bottom: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 15px;
+      background-color: #0f172a;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #818cf8;
+    }
+
+    button {
+      background-color: #6366f1;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #4f46e5;
+    }
+
+    /* Lista de Músicas */
+    .playlist {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .song-card {
+      background-color: #1e293b;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s, border-color 0.3s;
+    }
+
+    .song-card:hover {
+      transform: translateY(-2px);
+      border-color: #818cf8;
+    }
+
+    .song-info h3 {
+      color: #f8fafc;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .song-info p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    .song-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .btn-like {
+      background: transparent;
+      border: 1px solid #ef4444;
+      color: #ef4444;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-like:hover {
+      background: #ef4444;
+      color: white;
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 25px;
+      background-color: #0b0f19;
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🎵 Melodify</div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Caixa para Adicionar Música -->
+    <div class="form-box">
+      <h2>Partilhe a Sua Música Favorita</h2>
+      <form id="songForm">
+        <div class="form-group">
+          <label for="songTitle">Nome da Música:</label>
+          <input type="text" id="songTitle" placeholder="Ex: Starboy" required>
+        </div>
+        <div class="form-group">
+          <label for="songArtist">Artista / Banda:</label>
+          <input type="text" id="songArtist" placeholder="Ex: The Weeknd" required>
+        </div>
+        <div class="form-group">
+          <label for="userName">O seu Nome (ou Alcunha):</label>
+          <input type="text" id="userName" placeholder="Ex: Ana Silva" required>
+        </div>
+        <button type="submit">Adicionar à Lista</button>
+      </form>
+    </div>
+
+    <!-- Lista de Músicas da Comunidade -->
+    <h2>Músicas da Comunidade</h2>
+    <div class="playlist" id="playlistContainer">
+      
+      <!-- Música Exemplo 1 -->
+      <div class="song-card">
+        <div class="song-info">
+          <h3>Blinding Lights</h3>
+          <p>The Weeknd • Partilhado por: <strong>João</strong></p>
+        </div>
+        <div class="song-actions">
+          <button class="btn-like" onclick="likeSong(this)">❤️ 14</button>
+        </div>
+      </div>
+
+      <!-- Música Exemplo 2 -->
+      <div class="song-card">
+        <div class="song-info">
+          <h3>Levitating</h3>
+          <p>Dua Lipa • Partilhado por: <strong>Beatriz</strong></p>
+        </div>
+        <div class="song-actions">
+          <button class="btn-like" onclick="likeSong(this)">❤️ 9</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Melodify &copy; 2026 • Um espaço criativo para amantes de música.</p>
+  </footer>
+
+  <script>
+    // Função para adicionar nova música através do formulário
+    const form = document.getElementById('songForm');
+    const playlistContainer = document.getElementById('playlistContainer');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('songTitle').value;
+      const artist = document.getElementById('songArtist').value;
+      const user = document.getElementById('userName').value;
+
+      // Criar novo elemento HTML para a música
+      const newCard = document.createElement('div');
+      newCard.className = 'song-card';
+      newCard.innerHTML = `
+        <div class="song-info">
+          <h3>${title}</h3>
+          <p>${artist} • Partilhado por: <strong>${user}</strong></p>
+        </div>
+        <div class="song-actions">
+          <button class="btn-like" onclick="likeSong(this)">❤️ 1</button>
+        </div>
+      `;
+
+      // Adicionar no topo da lista
+      playlistContainer.prepend(newCard);
+
+      // Limpar formulário
+      form.reset();
+    });
+
+    // Função simples para incrementar gostos (likes)
+    function likeSong(button) {
+      let text = button.textContent; // Ex: "❤️ 14"
+      let parts = text.split(' ');
+      let count = parseInt(parts[1]) + 1;
+      button.textContent = `❤️ ${count}`;
+    }
+  </script>
+
+</body>
+</html>
